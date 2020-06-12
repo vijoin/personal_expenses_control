@@ -1,9 +1,28 @@
 {% extends 'base.html' %}
+{% block head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="style/style.css">
+{% endblock %}
 
 {% block content %}
-<h1>Hi New Products!</h1>
-  {% for product in products %}
-    {{ product.name }}
-    {{ product.price }}
+<h1>Products</h1>
+
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">Category: {% for cat in product.category.all %}{{ cat.name }} {% endfor %}<br>
+          Brand: {{ product.brand }}</p>
+          <p class="card-text">Last price: {{ product.productexpense_set.all.last.price }}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
     {% endfor %}
+  </div>
+</div>
 {% endblock %}
