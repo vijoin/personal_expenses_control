@@ -1,15 +1,34 @@
 from django import forms
-from .models import Expenses
-from products.models import Product
+from django.forms import modelformset_factory
+
+from .models import Expenses, ProductExpense
 
 
 class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expenses
-        fields = ['name', 'Location', 'date']
+        fields = ['name', 'location', 'date']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'class': 'form-control'}),
+        }
 
-class ProductExpenseForm(forms.Form):
-    product = forms.ModelChoiceField(queryset=Product.objects.all())
-    amount = forms.FloatField()
-    price = forms.FloatField()
-    comment = forms.CharField(widget=forms.Textarea)
+
+class ProductExpenseForm(forms.ModelForm):
+    class Meta:
+        model = ProductExpense
+        fields = ['product', 'amount', 'price', 'comment']
+        widgets = {
+            'product': forms.Select(attrs={'class': 'form-control'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'rows': '2'}),
+        }
+
+
+ProductExpenseFormSet = modelformset_factory(
+    ProductExpense,
+    form=ProductExpenseForm,
+    fields=('product', 'amount', 'price', 'comment')
+)

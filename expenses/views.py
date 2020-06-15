@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.forms import modelformset_factory
-from .forms import ExpenseForm
+from .forms import ExpenseForm, ProductExpenseFormSet
 from expenses.models import Expenses, ProductExpense
 
 
@@ -9,8 +8,6 @@ def index(request):
 
 
 def new(request, expense_id=None):
-    ProductExpenseFormSet = modelformset_factory(ProductExpense, fields=('product', 'amount', 'price', 'comment'))
-
     if expense_id:
         expense = Expenses.objects.get(pk=expense_id)
         form = ExpenseForm(instance=expense)
@@ -22,6 +19,7 @@ def new(request, expense_id=None):
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         formset = ProductExpenseFormSet(request.POST)
+
         if form.is_valid() and formset.is_valid():
             if not expense_id:
                 expense = form.save()
