@@ -22,5 +22,3 @@ class ProductExpense(models.Model):
 
     def __str__(self):
         return f"{self.expense_id} - {self.amount} | {self.price}"
-
-

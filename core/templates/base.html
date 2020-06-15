@@ -32,17 +32,25 @@
             <li class="nav-item">
             <a class="nav-link" href="{% url 'expenses-index' %}">Expenses</a>
           </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown03">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Expenses</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown02">
+              <a class="dropdown-item" href="{% url 'expenses-index' %}">Expenses List</a>
+              <a class="dropdown-item" href="{% url 'expenses-new' %}">New Expense</a>
+<!--              <a class="dropdown-item" href="#">Something else here</a>-->
+            </div>
+            </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown03">
+              <a class="dropdown-item" href="{% url 'products-index' %}">Products List</a>
+              <a class="dropdown-item" href="{% url 'new-product' %}">New Product</a>
+<!--              <a class="dropdown-item" href="#">Something else here</a>-->
+            </div>
+          </li>
             </ul>
             <form class="form-inline my-2 my-md-0">
               <input class="form-control" type="text" placeholder="Search">

@@ -1,0 +1,28 @@
+<style>
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .card {
+        margin: 10px;
+    }
+
+
+</style>
+
+
+<div class="cards-container">
+    {% for product in products %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+          <div class="pb-2">
+            <span class="badge badge-info">Category: {{ product.category }}</span>
+            <span class="badge badge-secondary"> Brand: {{ product.brand }}</span>
+          </div>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    {% endfor %}
+</div>
