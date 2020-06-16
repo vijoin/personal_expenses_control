@@ -18,11 +18,11 @@ class ExpenseForm(forms.ModelForm):
 class ProductExpenseForm(forms.ModelForm):
     class Meta:
         model = ProductExpense
-        fields = ['product', 'amount', 'price', 'comment']
+        fields = ['product', 'qty', 'amount', 'comment']
         widgets = {
             'product': forms.Select(attrs={'class': 'form-control'}),
+            'qty': forms.NumberInput(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control'}),
-            'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'comment': forms.Textarea(attrs={'class': 'form-control', 'rows': '2'}),
         }
 
@@ -30,5 +30,5 @@ class ProductExpenseForm(forms.ModelForm):
 ProductExpenseFormSet = modelformset_factory(
     ProductExpense,
     form=ProductExpenseForm,
-    fields=('product', 'amount', 'price', 'comment')
+    fields=('product', 'qty', 'amount', 'comment')
 )

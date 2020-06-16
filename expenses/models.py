@@ -15,14 +15,14 @@ class Expenses(models.Model):
 
     @property
     def total(self):
-        return sum(self.productexpense_set.values_list('price', flat=True))
+        return sum(self.productexpense_set.values_list('amount', flat=True))
 
 class ProductExpense(models.Model):
     expense = models.ForeignKey(Expenses, on_delete=models.CASCADE)
     product = models.ForeignKey('products.Product', on_delete=models.CASCADE)
+    qty = models.FloatField()
     amount = models.FloatField()
-    price = models.FloatField()
     comment = models.TextField()
 
     def __str__(self):
-        return f"{self.expense} - {self.amount} | {self.price}"
+        return f"{self.expense} - {self.qty} | {self.amount}"
