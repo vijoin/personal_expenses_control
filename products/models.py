@@ -37,10 +37,11 @@ class Product(models.Model):
     model = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
     uom = models.ForeignKey(ProductUom, on_delete=models.CASCADE)
     category = models.ManyToManyField(ProductCategory)
+    image = models.ImageField(null=True)
     #ToDo picture
     # ToDo max: Maximum price paid for this product (taken from expenses details)
     # ToDo min: Minimum price paid for this product (taken from expenses details)
     # ToDo last: Last price paid for this product (taken from expenses details)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} ({self.uom.symbol})"

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Product
+from .forms import ProductForm
 
 
 def index(request):
@@ -7,4 +8,5 @@ def index(request):
     return render(request, "products/index.html", context={'products': products})
 
 def new(request):
-    return render(request, 'products/new.html', {})
+    form = ProductForm()
+    return render(request, 'products/new.html', {'form': form})
