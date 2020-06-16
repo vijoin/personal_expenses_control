@@ -43,4 +43,4 @@ class Product(models.Model):
     # ToDo last: Last price paid for this product (taken from expenses details)
 
     def __str__(self):
-        return f"{self.id} - {self.name}"
+        return f"{self.name}"

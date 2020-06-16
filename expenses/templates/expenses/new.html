@@ -7,67 +7,60 @@
 
 {% block content%}
 
-
-    <h1>New Expense</h1>
-
+<h1>New Expense</h1>
 
 <div class="container">
-<!--    <form method="post">-->
-<!--      <div class="form-group">-->
-<!--        &lt;!&ndash;        <label for="exampleFormControlInput1">Email address</label>&ndash;&gt;-->
-<!--        <input type="text" class="form-control" id="name" placeholder="Name">-->
-<!--      </div>-->
-<!--        <div class="form-group">-->
-<!--            <input type="text" class="form-control" id="location" placeholder="Location">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input type="text" class="form-control" id="date" placeholder="MM/DD/YYYY">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input type="text" class="form-control" id="products_expense" placeholder="Products Expensed">-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary">Submit</button>-->
-<!--    </form>-->
-
-
 
 <form method="post">
     {% csrf_token %}
     {{ form.errors }}
-    {{ form.as_p }}
+
+
+    {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field.errors }}
+        {{ hidden_field }}
+    {% endfor %}
+
+    {{ id }}
+
+    {% for field in form.visible_fields %}
+
+    <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">{{ field.label_tag }}</div>
+        </div>
+        {{ field }}
+    </div>
+
+    {% endfor %}
+
 
     <h2>Expense Details</h2>
     <div class="row">
-        <div class="col">
+        <div class="col-5">
             Product
         </div>
-        <div class="col">
+        <div class="col-3">
             Qty
         </div>
-        <div class="col">
+        <div class="col-4">
             Amount
-        </div>
-        <div class="col">
-            Comment
         </div>
     </div>
     {{ formset.management_form }}
-    {% for f_form in formset %}
+    {% for f_formset in formset %}
     {{ f_form.errors }}
 
-    {{ f_form.id }}
+    {{ f_formset.id }}
     <div class="form-row mt-2 align-items-center">
-        <div class="col">
-            {{ f_form.product }}
+        <div class="col-5">
+            {{ f_formset.product }}
         </div>
-        <div class="col">
-            {{ f_form.qty }}
+        <div class="col-3">
+            {{ f_formset.qty }}
         </div>
-        <div class="col">
-            {{ f_form.amount }}
-        </div>
-        <div class="col">
-            {{ f_form.comment }}
+        <div class="col-4">
+            {{ f_formset.amount }}
         </div>
     </div>
     {% endfor %}

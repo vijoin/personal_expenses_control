@@ -18,12 +18,14 @@ def new(request, expense_id=None):
         formset = ProductExpenseFormSet(queryset=ProductExpense.objects.none())
 
     if request.method == 'POST':
-        form = ExpenseForm(request.POST)
+        if expense_id:
+            form = ExpenseForm(request.POST, instance=expense)
+        else:
+            form = ExpenseForm(request.POST)
         formset = ProductExpenseFormSet(request.POST)
 
         if form.is_valid() and formset.is_valid():
-            if not expense_id:
-                expense = form.save()
+            expense = form.save()
             instances = formset.save(commit=False)
             for instance in instances:
                 instance.expense = expense
