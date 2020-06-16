@@ -1,12 +1,14 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone as tz
 
 
 class Expenses(models.Model):
     name = models.CharField(max_length=100, null=True)
-    # Todo user = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=100, null=True)
-    date = models.DateTimeField(default=tz.now, null=True)  # ToDo Use NOW  as default
+    date = models.DateTimeField(default=tz.now, null=True)
+    # Todo user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-date']

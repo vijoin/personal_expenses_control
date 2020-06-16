@@ -1,13 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import ExpenseForm, ProductExpenseFormSet
 from expenses.models import Expenses, ProductExpense
 
 
+@login_required
 def index(request):
-    expenses = Expenses.objects.all()
+    user = request.user
+    expenses = Expenses.objects.filter(user=user).all()
     return render(request, 'expenses/index.html', {'expenses': expenses})
 
 
+@login_required
 def new(request, expense_id=None):
     if expense_id:
         expense = Expenses.objects.get(pk=expense_id)
@@ -25,7 +29,9 @@ def new(request, expense_id=None):
         formset = ProductExpenseFormSet(request.POST)
 
         if form.is_valid() and formset.is_valid():
-            expense = form.save()
+            expense = form.save(commit=False)
+            expense.user = request.user
+            expense.save()
             instances = formset.save(commit=False)
             for instance in instances:
                 instance.expense = expense
