@@ -4,7 +4,8 @@ from expenses.models import Expenses, ProductExpense
 
 
 def index(request):
-    return render(request, 'expenses/index.html', context={})
+    expenses = Expenses.objects.all()
+    return render(request, 'expenses/index.html', {'expenses': expenses})
 
 
 def new(request, expense_id=None):

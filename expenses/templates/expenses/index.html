@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Hi Expenses!</h1>
+<h1>Expenses</h1>
+
+<table class="table table-striped table-hover table-sm">
+    <thead class="thead-light">
+        <tr>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Location</th>
+            <th>Name</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+
+            <td><a href="{% url 'expenses-edit' expense_id=expense.id %}">{{ expense.date|date:"M d" }}</a></td>
+            <td>{{ expense.total }}</td>
+            <td>{{ expense.location }}</td>
+            <td>{{ expense.name }}</td>
+            <td>{{ expense.productexpense_set.all.count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
