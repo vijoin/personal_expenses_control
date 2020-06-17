@@ -15,10 +15,11 @@
       <img src="{{ product.image.url }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">Category: {% for cat in product.category.all %}{{ cat.name }} {% endfor %}<br>
-          Brand: {{ product.brand }}</p>
-          <p class="card-text">Last price: {{ product.productexpense_set.all.last.price }}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <p class="card-text">Category: {% for cat in product.category.all %}{{ cat.name }} {% endfor %}
+<!--            <br>Brand: {{ product.brand }}-->
+          </p>
+          <p class="card-text">Last price: {{ product.productexpense_set.all.last.amount }}</p>
+<!--          <a href="#" class="btn btn-primary">Go somewhere</a>-->
         </div>
       </div>
     </div>
