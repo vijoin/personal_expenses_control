@@ -33,11 +33,11 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
-    brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE)
-    model = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
-    uom = models.ForeignKey(ProductUom, on_delete=models.CASCADE)
-    category = models.ManyToManyField(ProductCategory)
-    image = models.ImageField(null=True)
+    brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, null=True)
+    model = models.ForeignKey(ProductModel, on_delete=models.CASCADE, null=True)
+    uom = models.ForeignKey(ProductUom, on_delete=models.CASCADE, null=True)
+    category = models.ManyToManyField(ProductCategory, null=True)
+    image = models.ImageField(upload_to='products/uploads/', null=True)
     #ToDo picture
     # ToDo max: Maximum price paid for this product (taken from expenses details)
     # ToDo min: Minimum price paid for this product (taken from expenses details)

@@ -12,7 +12,7 @@
     {% for product in products %}
     <div class="col">
       <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
+      <img src="{{ product.image.url }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">Category: {% for cat in product.category.all %}{{ cat.name }} {% endfor %}<br>
